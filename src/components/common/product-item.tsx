@@ -17,7 +17,10 @@ const ProductItem = ({ product, texteContainerClassname }: Props) => {
   console.log({ firstVariant });
 
   return (
-    <Link href={"/"} className="flex flex-col gap-4">
+    <Link
+      href={`/product-variant/${firstVariant.slug}`}
+      className="flex flex-col gap-4"
+    >
       <Image
         src={firstVariant.imageUrl}
         alt={firstVariant.name}

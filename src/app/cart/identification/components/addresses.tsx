@@ -27,6 +27,7 @@ import { useCreateShippingAddress } from "@/hooks/mutations/use-create-shipping-
 import { useUpdateCartShippingAddress } from "@/hooks/mutations/use-update-cart-shipping-address";
 import { useCart } from "@/hooks/queries/use-cart";
 import { useUserAddresses } from "@/hooks/queries/use-user-addresses";
+import { formatAddress } from "../../helpers/address";
 
 const formSchema = z.object({
   email: z.email("E-mail inválido"),
@@ -144,7 +145,7 @@ const Addresses = ({
                     <div className="flex-1">
                       <Label htmlFor={address.id} className="cursor-pointer">
                         <div>
-                          <p className="text-sm">{address.city}</p>
+                          <p className="text-sm">{formatAddress(address)}</p>
                         </div>
                       </Label>
                     </div>

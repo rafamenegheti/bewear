@@ -27,6 +27,7 @@ import { useCreateShippingAddress } from "@/hooks/mutations/use-create-shipping-
 import { useUpdateCartShippingAddress } from "@/hooks/mutations/use-update-cart-shipping-address";
 import { useCart } from "@/hooks/queries/use-cart";
 import { useUserAddresses } from "@/hooks/queries/use-user-addresses";
+
 import { formatAddress } from "../../helpers/address";
 
 const formSchema = z.object({
@@ -371,7 +372,7 @@ const Addresses = ({
                 }
               >
                 {createShippingAddressMutation.isPending ||
-                  updateCartShippingAddressMutation.isPending
+                updateCartShippingAddressMutation.isPending
                   ? "Salvando..."
                   : "Salvar endereço"}
               </Button>

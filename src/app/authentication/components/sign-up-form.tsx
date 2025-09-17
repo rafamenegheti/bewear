@@ -81,54 +81,68 @@ const SignUpForm = () => {
   }
 
   return (
-    <>
-      <Card>
-        <CardHeader>
-          <CardTitle>Criar conta</CardTitle>
-          <CardDescription>Crie uma conta para continuar.</CardDescription>
-        </CardHeader>
+    <Card className="border-none shadow-lg lg:border lg:shadow-md">
+      <CardHeader className="space-y-1 text-center lg:text-left">
+        <CardTitle className="text-xl lg:text-2xl">Criar conta</CardTitle>
+        <CardDescription className="text-sm lg:text-base">
+          Crie uma conta e comece a explorar nossa coleção
+        </CardDescription>
+      </CardHeader>
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <CardContent className="grid gap-6">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Nome</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Digite o seu nome" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <CardContent className="grid gap-4">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm font-medium">
+                    Nome completo
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Seu nome completo"
+                      {...field}
+                      className="focus:ring-primary/20 h-11 transition-all focus:ring-2"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Digite o seu email" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm font-medium">Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="seu@email.com"
+                      {...field}
+                      className="focus:ring-primary/20 h-11 transition-all focus:ring-2"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <div className="grid gap-4 lg:grid-cols-2">
               <FormField
                 control={form.control}
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Senha</FormLabel>
+                    <FormLabel className="text-sm font-medium">Senha</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Digite sua senha"
+                        placeholder="Mínimo 8 caracteres"
                         {...field}
                         type="password"
+                        className="focus:ring-primary/20 h-11 transition-all focus:ring-2"
                       />
                     </FormControl>
                     <FormMessage />
@@ -140,26 +154,58 @@ const SignUpForm = () => {
                 name="passwordConfirmation"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Confirmar senha</FormLabel>
+                    <FormLabel className="text-sm font-medium">
+                      Confirmar senha
+                    </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Confirme a sua senha"
+                        placeholder="Confirme sua senha"
                         {...field}
                         type="password"
+                        className="focus:ring-primary/20 h-11 transition-all focus:ring-2"
                       />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-            </CardContent>
-            <CardFooter>
-              <Button type="submit">Criar conta</Button>
-            </CardFooter>
-          </form>
-        </Form>
-      </Card>
-    </>
+            </div>
+
+            <div className="text-muted-foreground text-xs">
+              <p>
+                Ao criar uma conta, você aceita nossos{" "}
+                <button
+                  type="button"
+                  className="text-primary hover:underline"
+                  onClick={() => toast.info("Termos em desenvolvimento")}
+                >
+                  Termos de Serviço
+                </button>{" "}
+                e{" "}
+                <button
+                  type="button"
+                  className="text-primary hover:underline"
+                  onClick={() => toast.info("Política em desenvolvimento")}
+                >
+                  Política de Privacidade
+                </button>
+                .
+              </p>
+            </div>
+          </CardContent>
+
+          <CardFooter className="pt-0">
+            <Button
+              type="submit"
+              className="h-11 w-full rounded-lg transition-all hover:scale-[1.02]"
+              disabled={form.formState.isSubmitting}
+            >
+              {form.formState.isSubmitting ? "Criando conta..." : "Criar conta"}
+            </Button>
+          </CardFooter>
+        </form>
+      </Form>
+    </Card>
   );
 };
 

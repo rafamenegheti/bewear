@@ -14,32 +14,36 @@ interface Props {
 
 const ProductItem = ({ product, texteContainerClassname }: Props) => {
   const firstVariant = product.variants[0];
-  console.log({ firstVariant });
 
   return (
     <Link
       href={`/product-variant/${firstVariant.slug}`}
-      className="flex flex-col gap-4"
+      className="group flex flex-col gap-4 transition-transform hover:scale-105"
     >
-      <Image
-        src={firstVariant.imageUrl}
-        alt={firstVariant.name}
-        sizes="100vw"
-        height={0}
-        width={0}
-        className="h-auto w-full rounded-3xl"
-      />
+      <div className="relative overflow-hidden rounded-3xl">
+        <Image
+          src={firstVariant.imageUrl}
+          alt={firstVariant.name}
+          sizes="(max-width: 768px) 200px, (max-width: 1024px) 300px, 350px"
+          height={0}
+          width={0}
+          className="h-auto w-full transition-transform duration-300 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/5" />
+      </div>
       <div
         className={cn(
-          "flex max-w-[200px] flex-col gap-1",
+          "flex max-w-[200px] flex-col gap-1 lg:max-w-none",
           texteContainerClassname,
         )}
       >
-        <p className="truncate text-sm font-medium">{product.name}</p>
-        <p className="text-sx text-muted-foreground truncate font-medium">
+        <h3 className="truncate text-sm font-medium lg:text-base">
+          {product.name}
+        </h3>
+        <p className="text-muted-foreground truncate text-xs font-medium lg:text-sm">
           {product.description}
         </p>
-        <p className="truncate text-sm font-semibold">
+        <p className="truncate text-sm font-semibold lg:text-lg">
           {formatCentsToBRL(firstVariant.priceInCents)}
         </p>
       </div>
